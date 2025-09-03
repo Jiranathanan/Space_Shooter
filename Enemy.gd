@@ -1,5 +1,7 @@
 extends Area2D
 
+const ExplosionEffect = preload("res://ExplosionEffect.tscn")
+
 export(int) var SPEED = 20
 export(int) var ARMOR = 3
 
@@ -17,3 +19,10 @@ func _on_Enemy_body_entered(body):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+	
+func _exit_tree():
+	var main = get_tree().current_scene
+	var explosionEffect = ExplosionEffect.instance()
+	main.add_child(explosionEffect)
+	explosionEffect.global_position = global_position
+	

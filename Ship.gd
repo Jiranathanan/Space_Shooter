@@ -8,6 +8,8 @@ export(int) var SPEED = 100
 export(float) var FIRE_COOLDOWN = 0.25 # seconds between shots
 var fire_timer := 0.0
 
+signal player_death
+
 func _process(delta):
 	fire_timer -= delta
 	
@@ -30,6 +32,7 @@ func _exit_tree():
 	var explosionEffect = ExplosionEffect.instance()
 	main.add_child(explosionEffect)
 	explosionEffect.global_position = global_position
+	emit_signal("player_death")
 	
 func _on_Ship_area_entered(area):
 	area.queue_free()

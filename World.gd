@@ -10,3 +10,8 @@ func set_score(value):
 	
 	
 
+
+
+func _on_Ship_player_death():
+	yield(get_tree().create_timer(1), "timeout") #just quick way to create a timer or delay
+	get_tree().change_scene("res://GameOverScreen.tscn")
